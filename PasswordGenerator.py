@@ -9,7 +9,6 @@ Wachtwoord = TekenToevoegen
 AantalGroteLetters = random.randint(2,6)
 AantalCijfers = random.randint(4,7)
 AantalKleineLetters = 20 - AantalGroteLetters - AantalCijfers
-print (AantalKleineLetters)
 
 #Grote letters toevoegen
 for i in range (AantalGroteLetters):
