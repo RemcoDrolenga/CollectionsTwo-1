@@ -16,7 +16,7 @@ GegooideDobbelStenenList = []
 # 5 dobbelstenen dobbelen
 def DobbelSteenGooienToevoegen(DobbelStenenList ,HoeveelGooien):
     for i in range (HoeveelGooien):
-        DobbelSteen = random.randint(1,6)
+        DobbelSteen = random.randint(1,1)
         DobbelStenenList.append(DobbelSteen)
     print (DobbelStenenList)
     return DobbelStenenList
@@ -73,15 +73,37 @@ def FullHouse(DobbelList):
 # Small straight 0 punten voor vier oplopende dobbelstenen(volgorde maakt niet uit)
 def SmallStraight(DobbelList):
     DobbelListSet = set(DobbelList)
-    if len(DobbelListSet) == 4:
-        print ("Je hebt een Small straight. ")
+    DobbelVergelijkList = list(DobbelListSet)
+    DobbelList.sort()
+    if len(DobbelListSet) >= 4:
+        EersteGetalLijst = DobbelList[0]
+        DoorTellen = 0
+        for i in range (len(DobbelVergelijkList)):
+            if EersteGetalLijst == DobbelVergelijkList[i]:
+                EersteGetalLijst += 1
+                DoorTellen += 1
+        if DoorTellen == 4:
+                print ("Je hebt een Small Straight. ")
 # Large straight 40 punten voor 5 oplopende dobbelstenen (Volgorde maakt niet uit)
 def LargeStraight(DobbelList):
-    pass
+    DobbelListSet = set(DobbelList)
+    DobbelVergelijkList = list(DobbelListSet)
+    DobbelList.sort()
+    if len(DobbelListSet) >= 5:
+        EersteGetalLijst = DobbelList[0]
+        DoorTellen = 0
+        for i in range (len(DobbelVergelijkList)):
+            if EersteGetalLijst == DobbelVergelijkList[i]:
+                EersteGetalLijst += 1
+                DoorTellen += 1
+        if DoorTellen == 5:
+                print ("Je hebt een Large Straight. ")
 # Yahtzee (top score) 50 punten 50 punten als alle dobbelsten gelijk zijn
 def Yahtzee(DobbelList):
-    # set gebruiken
-    pass
+    DobbelListSet = set(DobbelList)
+    if len(DobbelListSet) == 1:
+        print ("Je hebt Yahtzee.")
+    
 # Chance: totaal aantal punten van alle gegooiden dobbelstenen.
 def Chance(DobbelList):
     pass
@@ -145,7 +167,8 @@ NieuweDobbelen = WilOpnieuwDobbelen(GegooideDobbelStenenList)
 print ("")
 # ThreeOfAKind(NieuweDobbelen)
 SmallStraight(NieuweDobbelen)
+LargeStraight(NieuweDobbelen)
+Yahtzee(NieuweDobbelen)
 print ("")
 
 ScoreBoord(Hoeveel_Eenen, Hoeveel_Tweeën, Hoeveel_Drieën, Hoeveel_Vieren, Hoeveel_Vijfen, Hoeveel_Zessen)
-
