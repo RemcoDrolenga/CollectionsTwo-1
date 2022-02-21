@@ -2,21 +2,20 @@ import random
 def VakjeAlIngevuld():
     print ("Dit vakje heb je al inveguld. ")
 
-Hoeveel_Eenen = 0
-Hoeveel_Tweeën = 0
-Hoeveel_Drieën = 0
-Hoeveel_Vieren = 0
-Hoeveel_Vijfen = 0
-Hoeveel_Zessen = 0
+
+RondeTellen = 0
+NogEenKeer = True
+HoevaakIngevuld = 0
 
 
-GegooideDobbelStenenList = []
-
+# GegooideDobbelStenenList = []
+ScoreBoordDictPart1 = {"Aces" : 0,"Twos" : 0,"Threes" : 0, "Fours" : 0, "Fives" : 0, "Sixes" : 0,"Total" : 0, "Bonus" : 0}
+ScroeBoordDictPart2 = {}
 
 # 5 dobbelstenen dobbelen
 def DobbelSteenGooienToevoegen(DobbelStenenList ,HoeveelGooien):
     for i in range (HoeveelGooien):
-        DobbelSteen = random.randint(1,1)
+        DobbelSteen = random.randint(1,6)
         DobbelStenenList.append(DobbelSteen)
     print (DobbelStenenList)
     return DobbelStenenList
@@ -25,7 +24,7 @@ def DobbelSteenGooienToevoegen(DobbelStenenList ,HoeveelGooien):
 # vragen welke de speler opnieuw wilt dobbelen
 def WilOpnieuwDobbelen(DobbelStenenList):
     BeurtOpnieuw = 0
-    while BeurtOpnieuw < 3:
+    while BeurtOpnieuw < 2:
         HoeveelToevoegen = 0
         DoorVragen = 0
         OpnieuwVragen = True
@@ -50,27 +49,40 @@ def WilOpnieuwDobbelen(DobbelStenenList):
     return DobbelStenenList
 
 # Three of a kind: drie dobbelstenen met dezelfde punten
-# laatste deel werkt nog niet
 def ThreeOfAKind(DobbelList):
     DobbelListSet = set(DobbelList)
     DobbelListDict = {"1" : 0, "2" : 0, "3" : 0, "4" : 0, "5" : 0, "6" : 0}
     if len(DobbelListSet) <= 3:
         for i in (DobbelList):
             DobbelListDict[str(i)] += 1
-        # for i in range (6):
-        if int('1') in DobbelListDict > 2:
-            print ("Je hebt Three of a Kind")
-        # print (DobbelListDict)
+        for key in DobbelListDict:
+            if DobbelListDict[key] == 3:
+                print ("Je hebt Three of a Kind. ")
         
 
 # Four of a  kind: vier dobbelstenen met dezelfde punten
 def FourOFAKind(DobbelList):
-    pass
+    DobbelListSet = set(DobbelList)
+    DobbelListDict = {"1" : 0, "2" : 0, "3" : 0, "4" : 0, "5" : 0, "6" : 0}
+    if len(DobbelListSet) <= 2:
+        for i in (DobbelList):
+            DobbelListDict[str(i)] += 1
+        for key in DobbelListDict:
+            if DobbelListDict[key] >= 4:
+                print ("Je hebt Four of a Kind. ")
 # Full House: 25 punten voor 3 gelijke en een paar (5 gelijke telt niet als full house tenzij het vak Yahtzee reeds is ingevuld.)
 def FullHouse(DobbelList):
-    # set gebruiken
-    pass
-# Small straight 0 punten voor vier oplopende dobbelstenen(volgorde maakt niet uit)
+    DobbelListSet = set(DobbelList)
+    DobbelListDict = {"1" : 0, "2" : 0, "3" : 0, "4" : 0, "5" : 0, "6" : 0}
+    if len(DobbelListSet) <= 2:
+        for i in (DobbelList):
+            DobbelListDict[str(i)] += 1
+        for key in DobbelListDict:
+            if DobbelListDict[key] == 3:
+                for x in DobbelListDict:
+                    if DobbelListDict[x] == 2:
+                        print ("Je hebt een Full House. ")
+# Small straight 30 punten voor vier oplopende dobbelstenen(volgorde maakt niet uit)
 def SmallStraight(DobbelList):
     DobbelListSet = set(DobbelList)
     DobbelVergelijkList = list(DobbelListSet)
@@ -98,77 +110,105 @@ def LargeStraight(DobbelList):
                 DoorTellen += 1
         if DoorTellen == 5:
                 print ("Je hebt een Large Straight. ")
-# Yahtzee (top score) 50 punten 50 punten als alle dobbelsten gelijk zijn
+# Yahtzee (top score) 50 punten als alle dobbelstenen gelijk zijn
 def Yahtzee(DobbelList):
     DobbelListSet = set(DobbelList)
     if len(DobbelListSet) == 1:
-        print ("Je hebt Yahtzee.")
+        print ("Je hebt Yahtzee. ")
     
 # Chance: totaal aantal punten van alle gegooiden dobbelstenen.
 def Chance(DobbelList):
-    pass
+    TotaalPunten = sum(DobbelList)
+    print ("Chance is:", TotaalPunten)
 
 
 
 # het scoreboord
-def ScoreBoord(Eenen, Tweeën, Drieën, Vieren, Vijfen, Zessen):
+def ScoreBoord(ScoreDictPart1,HoevaakIngevuld):
+    TotaalPunten = 0
     OpnieuwBlijvenVragen = True
     while OpnieuwBlijvenVragen == True:
         WelkeInvullen = input("Welk vakje van het scoreboord wil je invullen? ")
         WelkeInvullen = WelkeInvullen.lower()
         if WelkeInvullen == "aces":
-            if Eenen > 0:
+            if ScoreDictPart1["Aces"] > 0:
                 VakjeAlIngevuld()
             else:
-                Eenen = input("Hoeveel Aces heb je? ")
+                Eenen = int(input("Hoeveel Aces heb je? "))
+                HoevaakIngevuld += 1
+                ScoreDictPart1["Aces"] = Eenen
                 OpnieuwBlijvenVragen = False
         elif WelkeInvullen == "twos":
-            if Tweeën > 0:
+            if ScoreDictPart1["Twos"] > 0:
                 VakjeAlIngevuld()
             else:
-                Tweeën = input("Hoeveel Twos heb je? ")
+                Tweeën = int(input("Hoeveel Twos heb je? "))
+                HoevaakIngevuld += 1
+                ScoreDictPart1["Twos"] = Tweeën
                 OpnieuwBlijvenVragen = False
         elif WelkeInvullen == "threes":
-            if Drieën > 0:
+            if ScoreDictPart1["Threes"] > 0:
                 VakjeAlIngevuld()
             else:
-                Drieën = input("Hoeveel Threes heb je? ")
+                Drieën = int(input("Hoeveel Threes heb je? "))
+                HoevaakIngevuld += 1
+                ScoreDictPart1["Threes"] = Drieën
                 OpnieuwBlijvenVragen = False
         elif  WelkeInvullen == "fours":
-            if Vieren > 0:
+            if ScoreDictPart1["Fours"] > 0:
                 VakjeAlIngevuld()
             else:
-                Vieren = input("Hoeveel Fours heb je? ")
+                Vieren = int(input("Hoeveel Fours heb je? "))
+                HoevaakIngevuld += 1
+                ScoreDictPart1["Fours"] = Vieren
                 OpnieuwBlijvenVragen = False
         elif WelkeInvullen == "fives":
-            if Vijfen > 0:
+            if ScoreDictPart1["Fives"] > 0:
                 VakjeAlIngevuld()
             else:
-                Vijfen = input("Hoeveel Fives heb je? ")
+                Vijfen = int(input("Hoeveel Fives heb je? "))
+                HoevaakIngevuld += 1
+                ScoreDictPart1["Fives"] = Vijfen
                 OpnieuwBlijvenVragen = False
         elif WelkeInvullen == "sixes":
-            if Zessen > 0:
+            if ScoreDictPart1["Sixes"] > 0:
                 VakjeAlIngevuld()
             else:
+                Zessen = int(input("Hoeveel Sixes heb je? "))
                 OpnieuwBlijvenVragen = False
-                Zessen = input("Hoeveel Sixes heb je? ")
-        print ("Aces ", Eenen)
-        print ("Twos ", Tweeën)
-        print ("Threes ", Drieën)
-        print ("Fours ", Vieren)
-        print ("Fives ", Vijfen)
-        print ("Sixes ", Zessen)
+                HoevaakIngevuld += 1
+                ScoreDictPart1["Sixes"] = Zessen
+        if HoevaakIngevuld == 6:
+            Values = ScoreDictPart1.values()
+            TotaalPunten = sum(Values)
+            ScoreDictPart1["Total"] = TotaalPunten
+        if TotaalPunten >= 63:
+            print ("Je hebt 35 bonus punten")
+            ScoreDictPart1["Bonus"] = 35
+        print (ScoreDictPart1)
+        print ("")
 
 
+while RondeTellen < 13 and NogEenKeer == True:
+    NogEenKeer = True
+    GegooideDobbelStenenList = []
+    GegooideDobbelStenen = DobbelSteenGooienToevoegen(GegooideDobbelStenenList, 5)
+    print ("")
+    NieuweDobbelen = WilOpnieuwDobbelen(GegooideDobbelStenenList)
+    print ("")
+    ThreeOfAKind(NieuweDobbelen)
+    FourOFAKind(NieuweDobbelen)
+    FullHouse(NieuweDobbelen)
+    SmallStraight(NieuweDobbelen)
+    LargeStraight(NieuweDobbelen)
+    Yahtzee(NieuweDobbelen)
+    Chance(NieuweDobbelen)
+    print ("")
 
-GegooideDobbelStenen = DobbelSteenGooienToevoegen(GegooideDobbelStenenList, 5)
-print ("")
-NieuweDobbelen = WilOpnieuwDobbelen(GegooideDobbelStenenList)
-print ("")
-# ThreeOfAKind(NieuweDobbelen)
-SmallStraight(NieuweDobbelen)
-LargeStraight(NieuweDobbelen)
-Yahtzee(NieuweDobbelen)
-print ("")
-
-ScoreBoord(Hoeveel_Eenen, Hoeveel_Tweeën, Hoeveel_Drieën, Hoeveel_Vieren, Hoeveel_Vijfen, Hoeveel_Zessen)
+    ScoreBoord(ScoreBoordDictPart1,HoevaakIngevuld)
+    NogEenRonde = input("Wil je nog een ronde spelen? ")
+    if NogEenRonde == "ja":
+        NogEenKeer = True
+    else:
+        NogEenKeer = False
+    RondeTellen += 1
