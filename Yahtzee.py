@@ -10,7 +10,6 @@ HoevaakIngevuldPart2 = 0
 
 
 
-# GegooideDobbelStenenList = []
 ScoreBoordDictPart1 = {"Aces" : 0,"Twos" : 0,"Threes" : 0, "Fours" : 0, "Fives" : 0, "Sixes" : 0,"Total" : 0, "Bonus" : 0}
 ScoreBoordDictPart2 = {"Three Of A Kind" : 0, "Four Of A Kind" : 0, "Full House" : 0, "Small Straight" : 0,"Large Straight" : 0, "Yahtzee" : 0, "Chance" : 0, "TotalPart1" : 0, "TotalPart2" : 0, "Total" : 0}
 CombinatieBooleans = {"Three Of A Kind" : False, "Four Of A Kind" : False, "Full House" : False, "Small Straight" : False, "Large Straight" : False, "Yahtzee" : False}
@@ -300,8 +299,8 @@ while RondeTellen < 13 and NogEenKeer == True:
     RondeTellen += 1
     print ("Ronde", RondeTellen)
     NogEenKeer = True
-    GegooideDobbelStenenList = [1,2,3,4,5]
-    # GegooideDobbelStenen = DobbelSteenGooienToevoegen(GegooideDobbelStenenList, 5)
+    GegooideDobbelStenenList = []
+    GegooideDobbelStenen = DobbelSteenGooienToevoegen(GegooideDobbelStenenList, 5)
     print ("")
     NieuweDobbelen = WilOpnieuwDobbelen(GegooideDobbelStenenList)
     print ("")
