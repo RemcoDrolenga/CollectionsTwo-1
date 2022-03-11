@@ -48,15 +48,37 @@ def LootjesTrekken(NamenList):
             HoeveelheidTellen -= 1
         if HoeveelheidTellen == len(NamenList):
             Doorgaan = False
-          
     for key, value in GetrokkenLootjesDict.items():
         print(key, ' : ', value)
+
+    print ("Opnieuw")
     return GetrokkenLootjesDict
 
 def EigenLootjeControle(NamenList, LootjesDict):
-    for key in LootjesDict:
-        pass
+    OpnieuwLotenTrekken = LootjesDict
+    Opnieuw = True
+    OpnieuwLoten = False
+    while Opnieuw == True:
+        Opnieuw = False
+        for key in LootjesDict:
+            if key == LootjesDict[key]:
+                print ("Niet Goed")
+                OpnieuwLoten = True 
+                Opnieuw = True
+            # else:
+            #     Opnieuw = False
+        
+        print (OpnieuwLoten)
+        if OpnieuwLoten == True:
+            OpnieuwLotenTrekken = LootjesTrekken(LootjesNamen)
+            print ("Test")
+        else:
+            Opnieuw = False
+    
+    for key, value in OpnieuwLotenTrekken.items():
+        print(key, ' : ', value)
 
 
 LootjesNamen = NamenVragen(NamenLijst)
 LotenTrekken = LootjesTrekken(LootjesNamen)
+EigenLootjeControle(LootjesNamen, LotenTrekken)
