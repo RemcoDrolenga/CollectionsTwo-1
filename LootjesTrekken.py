@@ -1,11 +1,4 @@
-# Vraag namen op van deelnemers --- gedaan
-# Controleer telkens of een ingevoerde naam wel uniek is --- gedaan
-# Als er meer dan 2 namen zijn opgegeven kunnen er lootjes worden getrokken --- gedaan
-# Maak lootjes voor alle namen -- gedaan
-# Trek voor alle namen willekeurig (random) een lootje -- gedaan
-# Iedereen heeft dus één uniek lootje
-# Niemand mag het lootje van zichzelf hebben getrokken
-# Print een lijst met namen en bijbehorende lootjes
+
 import random
 
 NamenLijst = []
@@ -48,10 +41,7 @@ def LootjesTrekken(NamenList):
             HoeveelheidTellen -= 1
         if HoeveelheidTellen == len(NamenList):
             Doorgaan = False
-    for key, value in GetrokkenLootjesDict.items():
-        print(key, ' : ', value)
 
-    print ("Opnieuw")
     return GetrokkenLootjesDict
 
 def EigenLootjeControle(NamenList, LootjesDict):
@@ -62,16 +52,13 @@ def EigenLootjeControle(NamenList, LootjesDict):
         Opnieuw = False
         for key in LootjesDict:
             if key == LootjesDict[key]:
-                print ("Niet Goed")
                 OpnieuwLoten = True 
                 Opnieuw = True
-            # else:
-            #     Opnieuw = False
+            else:
+                Opnieuw = False
         
-        print (OpnieuwLoten)
         if OpnieuwLoten == True:
             OpnieuwLotenTrekken = LootjesTrekken(LootjesNamen)
-            print ("Test")
         else:
             Opnieuw = False
     
