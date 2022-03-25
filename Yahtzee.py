@@ -3,7 +3,48 @@ def VakjeAlIngevuld():
     print ("Dit vakje heb je al inveguld. ")
 
 
-RondeTellen = 0
+RondeTellen = 0 jwejhrqwkjrhwklrhwjrhklwqj
+
+we
+rq
+r
+wr
+wer
+ewr
+w
+rw
+rw
+er
+r
+
+rw
+rw
+er
+wr
+we
+rwe
+we
+rw
+rw
+re
+e
+ee
+e
+e
+e
+e
+e
+e
+e
+ee
+e
+e
+e
+e
+e
+ee
+e
+
 NogEenKeer = True
 HoevaakIngevuld = 0
 HoevaakIngevuldPart2 = 0
