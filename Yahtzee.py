@@ -290,8 +290,10 @@ def ScoreBoord(ScoreDictPart1,ScoreDictPart2,HoevaakIngevuldPart1, DobbelList, C
             ScoreBoordDictPart2["TotalPart1"] = TotaalPuntenPart1
             TotaalPuntenPart1_2 = TotaalPuntenPart2 + TotaalPuntenPart1
             ScoreBoordDictPart2["Total"] = TotaalPuntenPart1_2
-        print (ScoreDictPart1)
-        print (ScoreBoordDictPart2)
+        for key, value in ScoreDictPart1.items():
+            print(key, ' : ', value)
+        for key, value in ScoreBoordDictPart2.items():
+            print(key, ' : ', value)
         print ("")
 
 

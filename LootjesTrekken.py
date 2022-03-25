@@ -51,6 +51,7 @@ def EigenLootjeControle(NamenList, LootjesDict):
     while Opnieuw == True:
         Opnieuw = False
         for key in LootjesDict:
+            OpnieuwLoten = False
             if key == LootjesDict[key]:
                 OpnieuwLoten = True 
                 Opnieuw = True
